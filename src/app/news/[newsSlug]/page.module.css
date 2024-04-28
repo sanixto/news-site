@@ -1,0 +1,10 @@
+.image {
+  position: relative;
+  width: 7rem;
+  height: 7rem;
+}
+
+.image img {
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
