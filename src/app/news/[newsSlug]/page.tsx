@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation'
 
 import styles from './page.module.css';
 import { DUMMY_NEWS } from '@/dummy-news';
-import News from '@/interfaces/news.interface';
-import { notFound } from 'next/navigation';
+import News from '@/interfaces/news.interface';;
 
 interface NewsDetailPageProps {
   params: {
@@ -23,7 +24,9 @@ export default function NewsDetailPage(props: NewsDetailPageProps) {
     <article>
       <header>
         <div className={styles.image}>
-          <Image src={`/images/news/${newsItem.image}`} alt={newsItem.title} fill />
+          <Link href={`/news/${newsItem.slug}/image`}>
+            <Image src={`/images/news/${newsItem.image}`} alt={newsItem.title} fill />
+          </Link>
         </div>
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
