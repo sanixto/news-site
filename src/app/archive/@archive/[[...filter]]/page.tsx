@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import { getAvailableNewsMonths, getAvailableNewsYears, getNewsForYear, getNewsForYearAndMonth } from '@/lib/news';
 import News from '@/interfaces/news.interface';
-import NewsList from '@/components/main-header/news-list';
+import NewsList from '@/components/news-list';
 
 interface FilteredNewsPageProps {
   params: {
