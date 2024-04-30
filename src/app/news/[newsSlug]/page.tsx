@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import { DUMMY_NEWS } from '@/dummy-news';
 import News from '@/interfaces/news.interface';
+import { notFound } from 'next/navigation';
 
 interface NewsDetailPageProps {
   params: {
@@ -12,7 +13,11 @@ interface NewsDetailPageProps {
 
 export default function NewsDetailPage(props: NewsDetailPageProps) {
   const { newsSlug } = props.params;
-  const newsItem: News = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+  const newsItem: News | undefined = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+
+  if (!newsItem) {
+    notFound();
+  }
 
   return (
     <article>
@@ -23,9 +28,7 @@ export default function NewsDetailPage(props: NewsDetailPageProps) {
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
       </header>
-      <main>
-        <p>{newsItem.content}</p>
-      </main>
+      <p>{newsItem.content}</p>
     </article>
   );
 }
