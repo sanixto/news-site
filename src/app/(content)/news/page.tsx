@@ -1,15 +1,9 @@
 import NewsList from '@/components/news-list';
 import News from '@/interfaces/news.interface';
+import { getAllNews } from '@/lib/news';
 
 export default async function NewsPage() {
-  const host: string = process.env.HOST!;
-  const port: string = process.env.SERVER_PORT!;
-  const response: Response = await fetch(`http://${host}:${port}/news`);
-
-  if (!response.ok) throw new Error('Failed to fetch news.');
-
-  const news: News[] = await response.json();
-
+  const news: News[] = await getAllNews();
   return (
     <>
       <h1>News page</h1>
