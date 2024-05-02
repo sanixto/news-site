@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation'
 
 import styles from './page.module.css';
-import { DUMMY_NEWS } from '@/dummy-news';
-import News from '@/interfaces/news.interface';;
+import News from '@/interfaces/news.interface';
+import { getNewsItem } from '@/lib/news';
 
 interface NewsDetailPageProps {
   params: {
@@ -12,9 +12,9 @@ interface NewsDetailPageProps {
   }
 }
 
-export default function NewsDetailPage(props: NewsDetailPageProps) {
+export default async function NewsDetailPage(props: NewsDetailPageProps) {
   const { newsSlug } = props.params;
-  const newsItem: News | undefined = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+  const newsItem: News | undefined = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();

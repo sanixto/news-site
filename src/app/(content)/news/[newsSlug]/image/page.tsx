@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-
-import { DUMMY_NEWS } from '@/dummy-news';
 import News from '@/interfaces/news.interface';
 import styles from './page.module.css';
+import { getNewsItem } from '@/lib/news';
 
 interface ImagePageProps {
   params: {
@@ -12,10 +11,9 @@ interface ImagePageProps {
   }
 }
 
-
-export default function ImagePage(props: ImagePageProps) {
+export default async function ImagePage(props: ImagePageProps) {
   const { newsSlug } = props.params;
-  const newsItem: News | undefined = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+  const newsItem: News | undefined = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();
